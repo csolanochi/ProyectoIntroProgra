@@ -11,6 +11,8 @@ public class cGestion {
     private int cantidadUsuarios = 0;
     private cEvento[] eventosActivos = new cEvento[50];
     private int cantidadEventos = 0;
+    private int cantidadEntradas = 0;
+    private cUsuario usuarioEntrada;
 
     public void registarUsuario() {
         if (cantidadUsuarios < 200) {
@@ -58,6 +60,7 @@ public class cGestion {
         for (int i = 0; i < cantidadUsuarios; i++) {
             if (newidUsuario.equals(usuariosActivos[i].getIDUsuario()) && correo.equals(usuariosActivos[i].getCorreoUsuario())) {
                 JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso.");
+                usuarioEntrada = usuariosActivos[i];
                 return usuariosActivos[i].getRol(); 
             }
         }
@@ -83,7 +86,42 @@ public class cGestion {
             JOptionPane.showMessageDialog(null, "No se pueden registrar más usuarios. Límite alcanzado.");
         }
     }
+    
+    public void mostrarListaEventos() {
+        if (cantidadEventos == 0) {
+            JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
+            return;
+        }
+        String listaEventos = "Eventos registrados:\n";
+        for (int i = 0; i < cantidadEventos; i++) {
+            listaEventos += (i + 1) + ". " + eventosActivos[i].getNombreEvento() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, listaEventos);
+    }
+    
+    public void comprarEntrada(){ //En proceso...
 
+        mostrarListaEventos();
+
+        if (cantidadEventos > 0) {
+            int seleccionEvento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número del evento"));
+            cEvento eventoSeleccionado = eventosActivos[seleccionEvento - 1]; 
+            int cantidadEntradas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de entradas (máximo 5):"));
+            // Validar cantidad máxima
+            if (cantidadEntradas > 5) {
+                JOptionPane.showMessageDialog(null, "No puede comprar más de 5 entradas.");
+                return;
+            }else{
+                for (int i = 0; i == cantidadEntradas; i++){
+                    char[][] codigosEntradas = generarCodigoEntrada();
+                    String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
+                    cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
+                    JOptionPane.showMessageDialog(null, "tEcST " + IDEntrada + usuarioEntrada.getIDUsuario() + eventoSeleccionado.getNombreEvento());
+                }
+            }
+        }
+    }
+    
     private char[][] generarCodigoEvento(){
         String caracteres = "1234567890";
         char[][] codigos = new char[50][3]; // Almacenar 50 códigos de 3 caracteres
@@ -99,18 +137,21 @@ public class cGestion {
             return codigos;
     }   
     
-    
-    public void mostrarListaEventos() {
-        if (cantidadEventos == 0) {
-            JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
-            return;
-        }
-        String listaEventos = "Eventos registrados:\n";
-        for (int i = 0; i < cantidadEventos; i++) {
-            listaEventos += (i + 1) + ". " + eventosActivos[i].getNombreEvento() + "\n";
-        }
-        JOptionPane.showMessageDialog(null, listaEventos);
-    }
+    private char[][] generarCodigoEntrada(){
+        String caracteres = "1234567890";
+        char[][] codigos = new char[500][3]; 
+        Random random = new Random();
+                
+        for (int contador = 0; contador < 50; contador++) {
+            char[] codigo = new char[3];
+            for (int i = 0; i < 3; i++) {
+                codigo[i] = caracteres.charAt(random.nextInt(caracteres.length()));
+            }
+            codigos[contador] = codigo; // Almacenar el código generado
+            }
+            return codigos;
+    }   
+       
 }
 
     

@@ -40,6 +40,7 @@ public class EventoGo {
                                         gestion.mostrarListaEventos();
                                         break;
                                     case 2:
+                                        gestion.comprarEntrada();
                                         break;
                                     case 3:
                                         break;
