@@ -83,7 +83,7 @@ public class cGestion {
             cantidadEventos++;
             JOptionPane.showMessageDialog(null, "El evento ha sido registrado con éxito. ID: " + evento.getIDEvento());
         }else{
-            JOptionPane.showMessageDialog(null, "No se pueden registrar más usuarios. Límite alcanzado.");
+            JOptionPane.showMessageDialog(null, "No se pueden registrar más eventos. Límite alcanzado.");
         }
     }
     
