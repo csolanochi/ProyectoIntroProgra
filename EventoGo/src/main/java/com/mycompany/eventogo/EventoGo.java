@@ -10,7 +10,7 @@ public class EventoGo {
         cGestion gestion = new cGestion();
         int opcion;
 
-        do { // soy Elías
+        do { // soy Elías Jiménez
             opcion = Integer.parseInt(JOptionPane.showInputDialog(
                 "Bienvenido(a) a EventosGo, seleccione una opción para continuar:\n" +
                 "1. Registrar usuario\n" +
