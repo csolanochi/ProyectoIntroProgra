@@ -9,7 +9,7 @@ public class EventoGo {
     public static void main(String[] args) {
         cGestion gestion = new cGestion();
         int opcion;
-
+        //  soy nicole
         do {//cometario
             opcion = Integer.parseInt(JOptionPane.showInputDialog(
                 "Bienvenido(a) a EventosGo, seleccione una opción para continuar:\n" +
