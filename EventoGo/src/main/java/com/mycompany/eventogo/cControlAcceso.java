@@ -10,5 +10,7 @@ import javax.swing.JOptionPane;
  * @author carolinasolano
  */
 public class cControlAcceso {
-        
+     private cEntrada entrada;
+     
 }
+  
