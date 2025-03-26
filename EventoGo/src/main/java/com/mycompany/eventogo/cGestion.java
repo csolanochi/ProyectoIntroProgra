@@ -108,11 +108,11 @@ public class cGestion {
             cEvento eventoSeleccionado = eventosActivos[seleccionEvento - 1]; 
             int cantidadEntradas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de entradas (máximo 5):"));
             // Validar cantidad máxima
-            if (cantidadEntradas > 5) {
-                JOptionPane.showMessageDialog(null, "No puede comprar más de 5 entradas.");
+            if (cantidadEntradas > 5 || cantidadEntradas <= 0) {
+                JOptionPane.showMessageDialog(null, "Cantidad no permitida.");
                 return;
             }else{
-                for (int i = 0; i == cantidadEntradas; i++){
+                for (int i = 0; i < cantidadEntradas; i++){
                     char[][] codigosEntradas = generarCodigoEntrada();
                     String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
                     cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
