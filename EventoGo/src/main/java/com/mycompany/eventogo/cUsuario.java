@@ -34,6 +34,14 @@ public class cUsuario {
         return this.correoElectronico;
     }
     
+    public void setCorreoUsuario(String correoElectronico) {
+        if(!correoElectronico.contains("@")|| correoElectronico.contains(" ")){
+            JOptionPane.showMessageDialog(null,"No es una cuenta de correo válida, intente de nuevo.");
+        } else {
+            this.correoElectronico = correoElectronico;
+        }
+    }
+    
     public int getRol(){
         return this.rol;
     }

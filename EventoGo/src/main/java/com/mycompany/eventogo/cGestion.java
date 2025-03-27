@@ -19,6 +19,13 @@ public class cGestion {
             String cedulaUsuario = JOptionPane.showInputDialog("Ingrese su numero de cedula");
             String nombreUsuario = JOptionPane.showInputDialog("Ingrese su nombre");
             String correoUsuario = JOptionPane.showInputDialog("Ingrese su correo electronico");
+            
+            // Validar que el correo tenga @ y que no esté vacío
+            
+            if(!correoUsuario.contains("@")|| correoUsuario.contains(" ")){
+            JOptionPane.showMessageDialog(null,"No es una cuenta de correo válida, intente de nuevo.");
+            return;
+            }
 
             // Validar que el ID no esté repetido
             boolean idRepetido = false;
