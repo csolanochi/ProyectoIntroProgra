@@ -9,7 +9,6 @@ public class EventoGo {
   
     public static void main(String[] args) {
         cGestion gestion = new cGestion();
-        cControlAcceso control = new cControlAcceso(gestion);
         
         int opcion;
         do {
