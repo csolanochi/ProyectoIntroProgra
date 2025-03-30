@@ -49,7 +49,7 @@ public class cEntrada {
         this.estado = nuevoEstado;
     }
     
-    public boolean esValidad() {
+    public boolean validacionEntrada() {
         return estado == ESTADO.ACTIVO;       
     }
     

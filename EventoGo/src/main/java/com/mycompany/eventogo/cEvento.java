@@ -16,7 +16,7 @@ public class cEvento {
     private String fecha;
     private String tipoEvento;
     private int capacidadMaxima;
-    private int entradasVendidas;
+    private int entradasVendidas = 0;
     
     // Constructor
     
@@ -67,8 +67,7 @@ public class cEvento {
     }
     
     public void venderEntradas(int cantidad) {
-        if (hayDisponibilidad()) {
-            entradasVendidas += cantidad;
+        entradasVendidas++;
         }
     }
-}
+

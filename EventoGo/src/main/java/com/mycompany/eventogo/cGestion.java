@@ -11,8 +11,10 @@ public class cGestion {
     private int cantidadUsuarios = 0;
     private cEvento[] eventosActivos = new cEvento[50];
     private int cantidadEventos = 0;
-    private int cantidadEntradas = 0;
     private cUsuario usuarioEntrada;
+    private cEntrada[] entradas = new cEntrada [500];
+    private int contadorEntradas = 0;
+    
     
       public void registarUsuario() {
         if (cantidadUsuarios < 200) {

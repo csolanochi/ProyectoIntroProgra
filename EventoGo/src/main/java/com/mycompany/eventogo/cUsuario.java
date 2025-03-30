@@ -13,7 +13,8 @@ public class cUsuario {
     private String nombre;
     private String correoElectronico;
     private int rol;
-    private cEntrada listaEntradas;
+    private cEntrada[] entradas = new cEntrada[5];
+    private int contadorEntradas = 0;
     
     public cUsuario(String pIDUsuario, String pNombre, String pcorreoElectronico, int prol){
         this.IDUsuario = "USR-" + pIDUsuario;
@@ -34,24 +35,25 @@ public class cUsuario {
         return this.correoElectronico;
     }
     
-    public void setCorreoUsuario(String correoElectronico) {
-        if(!correoElectronico.contains("@")|| correoElectronico.contains(" ")){
-            JOptionPane.showMessageDialog(null,"No es una cuenta de correo válida, intente de nuevo.");
-        } else {
-            this.correoElectronico = correoElectronico;
-        }
-    }
-    
+    // public void setCorreoUsuario(String correoElectronico) {
+       // if(!correoElectronico.contains("@")|| correoElectronico.contains(" ")){
+         //   JOptionPane.showMessageDialog(null,"No es una cuenta de correo válida, intente de nuevo.");
+        //} else {
+         //   this.correoElectronico = correoElectronico;
+           
     public int getRol(){
         return this.rol;
     }
+    // Validación de límite de entradas
+    public boolean agregarEntrada(cEntrada entrada) {
+      if (contadorEntradas < 5) {
+            entradas[contadorEntradas] = entrada;
+            contadorEntradas++;
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El límite es de 5 entradas por usuario.");
+            return false;
+        }
     
-    public cEntrada getEventosComprados() {
-        return this.listaEntradas;
     }
-    
-    public void agregarEntrada() {
-      
-    }
-    
 }
