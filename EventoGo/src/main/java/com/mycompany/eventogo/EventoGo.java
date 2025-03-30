@@ -6,9 +6,11 @@ import javax.swing.JOptionPane;
 
 public class EventoGo {
 
-    //comentario Caro
+  
     public static void main(String[] args) {
         cGestion gestion = new cGestion();
+        cControlAcceso control = new cControlAcceso(gestion);
+        
         int opcion;
         do {
             opcion = Integer.parseInt(JOptionPane.showInputDialog(

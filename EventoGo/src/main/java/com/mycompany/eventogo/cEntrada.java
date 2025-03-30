@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class cEntrada {
      
-    enum ESTADO{
+    public enum ESTADO{
     ACTIVO,
     INACTIVO,
     }
@@ -20,12 +20,16 @@ public class cEntrada {
     private cEvento evento;
     private ESTADO estado;
     
+    // Constructor
+    
     public cEntrada(String pIDEntrada, cUsuario pusuario, cEvento pevento){
         this.IDEntrada = "TKT-" + pIDEntrada;
         this.usuario = pusuario;
         this.evento = pevento;
         this.estado = ESTADO.ACTIVO;
     }
+    
+    // Getters
     
     public String getIDEntrada() {
         return this.IDEntrada;
@@ -39,7 +43,17 @@ public class cEntrada {
         return this.evento;
     }
     
+    // Métodos
+    
     public void actualizarEstado(ESTADO nuevoEstado) {
         this.estado = nuevoEstado;
+    }
+    
+    public boolean esValidad() {
+        return estado == ESTADO.ACTIVO;       
+    }
+    
+    public void marcarUtilizada() {
+        this.estado = ESTADO.INACTIVO;
     }
 }

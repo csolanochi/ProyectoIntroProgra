@@ -13,8 +13,8 @@ public class cGestion {
     private int cantidadEventos = 0;
     private int cantidadEntradas = 0;
     private cUsuario usuarioEntrada;
-
-    public void registarUsuario() {
+    
+      public void registarUsuario() {
         if (cantidadUsuarios < 200) {
             String cedulaUsuario = JOptionPane.showInputDialog("Ingrese su numero de cedula");
             String nombreUsuario = JOptionPane.showInputDialog("Ingrese su nombre");
@@ -106,7 +106,7 @@ public class cGestion {
         JOptionPane.showMessageDialog(null, listaEventos);
     }
     
-    public void comprarEntrada(){ //En proceso...
+    public void comprarEntrada(){ 
 
         mostrarListaEventos();
 
@@ -123,7 +123,7 @@ public class cGestion {
                     char[][] codigosEntradas = generarCodigoEntrada();
                     String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
                     cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
-                    JOptionPane.showMessageDialog(null, "tEcST " + IDEntrada + usuarioEntrada.getIDUsuario() + eventoSeleccionado.getNombreEvento());
+                    JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + usuarioEntrada.getIDUsuario() + eventoSeleccionado.getNombreEvento());
                 }
             }
         }

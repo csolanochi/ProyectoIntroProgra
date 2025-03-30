@@ -16,7 +16,9 @@ public class cEvento {
     private String fecha;
     private String tipoEvento;
     private int capacidadMaxima;
-    private int EntradasVendidas;
+    private int entradasVendidas;
+    
+    // Constructor
     
     public cEvento(String pIDEvento, String pNombre, String pubicacion, String pfecha, String ptipoEvento, int pcapacidadMaxima){
         this.IDEvento = "EVT-" + pIDEvento;
@@ -26,6 +28,8 @@ public class cEvento {
         this.tipoEvento = ptipoEvento;
         this.capacidadMaxima = pcapacidadMaxima;
     }
+    
+    // Getters
     
     public String getIDEvento() {
         return this.IDEvento;
@@ -49,5 +53,22 @@ public class cEvento {
    
     public int getCapacidadMaxima(){
         return this.capacidadMaxima;
+    }
+    
+    public int getentradasDisponibles() {
+        return this.capacidadMaxima - entradasVendidas;
+        
+    }
+    
+    // Metodos
+    
+    public boolean hayDisponibilidad() {
+        return entradasVendidas < capacidadMaxima;       
+    }
+    
+    public void venderEntradas(int cantidad) {
+        if (hayDisponibilidad()) {
+            entradasVendidas += cantidad;
+        }
     }
 }
