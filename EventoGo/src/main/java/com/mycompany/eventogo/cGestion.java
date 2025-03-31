@@ -125,10 +125,18 @@ public class cGestion {
                     char[][] codigosEntradas = generarCodigoEntrada();
                     String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
                     cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
-                    JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + usuarioEntrada.getIDUsuario() + eventoSeleccionado.getNombreEvento());
+                    JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + "|" + usuarioEntrada.getIDUsuario() + "|" + eventoSeleccionado.getNombreEvento());
                 }
             }
         }
+    }
+    
+    public cEntrada[] getEntradas() {
+        return this.entradas;
+    }
+
+    public int getTotalEntradas() {
+        return this.contadorEntradas;
     }
     
     private char[][] generarCodigoEvento(){

@@ -65,6 +65,9 @@ public class EventoGo {
                                         gestion.registrarEvento();
                                         break;
                                     case 2:
+                                        String codigoEntrada = JOptionPane.showInputDialog("Ingrese código de entrada (TKT-###):");
+                                        cControlAcceso control = new cControlAcceso(gestion.getEntradas(), gestion.getTotalEntradas());
+                                        control.validarEntrada(codigoEntrada);    
                                         break;
                                     case 3:
                                         break;
