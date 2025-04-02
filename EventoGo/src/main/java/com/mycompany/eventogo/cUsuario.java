@@ -56,4 +56,18 @@ public class cUsuario {
         }
     
     }
+    
+    public void mostrarEntradasCompradas() {
+        if (contadorEntradas == 0) {
+            JOptionPane.showMessageDialog(null, "No has comprado entradas aún.");
+            return;
+        }
+        String entradasCompradas = "Entradas compradas:\n";
+        for (int i = 0; i < contadorEntradas; i++) {
+            entradasCompradas += (i + 1) + ". Evento: " + entradas[i].getEventoEntrada().getNombreEvento() + 
+                                 ", Fecha: " + entradas[i].getEventoEntrada().getFechaEvento() + 
+                                 ", Código de entrada: " + entradas[i].getIDEntrada() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, entradasCompradas);
+    }
 }

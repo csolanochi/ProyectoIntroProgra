@@ -126,6 +126,12 @@ public class cGestion {
                     String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
                     cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
                     JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + "|" + usuarioEntrada.getIDUsuario() + "|" + eventoSeleccionado.getNombreEvento());
+                if(contadorEntradas  < 500){
+                    entradas[contadorEntradas ]=entrada;
+                    contadorEntradas ++;
+                   
+                }
+                
                 }
             }
         }
@@ -168,7 +174,23 @@ public class cGestion {
             }
             return codigos;
     }   
-       
+    
+    public  String mostrarProximosEventos(){
+        if (contadorEntradas == 0) {
+            JOptionPane.showMessageDialog(null, "No hay entradas compradas aún.");
+            return "";
+        }
+        
+        String proximosEventos = "Proximos eventos:\n";
+        for (int i = 0; i < contadorEntradas; i++) {
+            proximosEventos += (i + 1) + ". Evento: " + entradas[i].getEventoEntrada().getNombreEvento() + 
+                                 ", Fecha: " + entradas[i].getEventoEntrada().getFechaEvento() + 
+                                 ", Código de entrada: " + entradas[i].getIDEntrada() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, proximosEventos);
+        
+        return proximosEventos;
+    }
 }
 
     

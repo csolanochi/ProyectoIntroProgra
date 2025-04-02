@@ -43,6 +43,7 @@ public class EventoGo {
                                         gestion.comprarEntrada();//pendiente
                                         break;
                                     case 3:
+                                        String proximosEventos = gestion.mostrarProximosEventos(); 
                                         break;
                                     case 4: 
                                         break;
