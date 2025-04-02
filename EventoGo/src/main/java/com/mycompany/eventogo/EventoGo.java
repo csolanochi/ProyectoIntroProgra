@@ -5,7 +5,7 @@ package com.mycompany.eventogo;
 import javax.swing.JOptionPane;
 
 public class EventoGo {
-// hola prueba 
+ 
     public static void main(String[] args) {
         cGestion gestion = new cGestion();
         
