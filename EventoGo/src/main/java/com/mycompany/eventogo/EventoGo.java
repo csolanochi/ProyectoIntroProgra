@@ -70,6 +70,7 @@ public class EventoGo {
                                         control.validarEntrada(codigoEntrada);    
                                         break;
                                     case 3:
+                                        gestion.generarReporteEventosDisponibles();
                                         break;
                                     case 4: 
                                         break;

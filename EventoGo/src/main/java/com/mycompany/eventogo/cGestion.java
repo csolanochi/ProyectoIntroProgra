@@ -130,6 +130,7 @@ public class cGestion {
                     entradas[contadorEntradas ]=entrada;
                     contadorEntradas ++;
                    
+                    
                 }
                 
                 }
@@ -191,6 +192,23 @@ public class cGestion {
         
         return proximosEventos;
     }
-}
-
     
+    public void generarReporteEventosDisponibles(){
+        if (cantidadEventos == 0) {
+        JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
+        return;
+    }
+        String reporteEventos = "";
+    
+        for (int i = 0; i < cantidadEventos; i++) {
+            cEvento evento = eventosActivos[i];
+            reporteEventos += "Evento: " + evento.getNombreEvento() + "\n"
+                           + "Ubicación: " + evento.getUbicacionEvento() + "\n"
+                           + "Fecha: " + evento.getFechaEvento() + "\n"
+                           + "Tipo: " + evento.getTipoEvento() + "\n"
+                           + "Entradas Disponibles: " + evento.getentradasDisponibles() + "\n"
+                           + "--------------------------------------\n";;
+    }
+        JOptionPane.showMessageDialog(null, reporteEventos);
+}    
+}
