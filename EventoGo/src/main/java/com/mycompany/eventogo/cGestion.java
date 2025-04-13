@@ -120,22 +120,22 @@ public class cGestion {
             if (cantidadEntradas > 5 || cantidadEntradas <= 0) {
                 JOptionPane.showMessageDialog(null, "Cantidad no permitida.");
                 return;
-            }else{
-                for (int i = 0; i < cantidadEntradas; i++){
-                    char[][] codigosEntradas = generarCodigoEntrada();
-                    String IDEntrada = new String(codigosEntradas[cantidadEntradas]);
-                    cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
-                    JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + "|" + usuarioEntrada.getIDUsuario() + "|" + eventoSeleccionado.getNombreEvento());
-                if(contadorEntradas  < 500){
-                    entradas[contadorEntradas ]=entrada;
-                    contadorEntradas ++;
-                   
-                    
-                }
-                
-                }
             }
-        }
+                // Validacion de disponibilidad y venta
+            if (eventoSeleccionado.venderEntradas(cantidadEntradas)){
+                for (int i = 0; i < cantidadEntradas; i++){    
+                     char[][] codigosEntradas = generarCodigoEntrada();
+                     String IDEntrada = new String(codigosEntradas[contadorEntradas]); // Se utiliza contadorEntradas como índice
+                     cEntrada entrada = new cEntrada(IDEntrada, usuarioEntrada, eventoSeleccionado);
+                     entradas[contadorEntradas] = entrada;
+                     contadorEntradas++;
+                    JOptionPane.showMessageDialog(null, "TKT-" + IDEntrada + "|" + usuarioEntrada.getIDUsuario() + "|" + eventoSeleccionado.getNombreEvento());
+                    }
+                    } else {
+                    JOptionPane.showMessageDialog(null, "No hay suficientes entradas disponibles para efectuar la compra");                  
+                    
+                }                              
+            }      
     }
     
     public cEntrada[] getEntradas() {

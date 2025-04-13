@@ -66,7 +66,11 @@ public class cEvento {
         return entradasVendidas < capacidadMaxima;       
     }
     
-    public void venderEntradas(int cantidad) {
-        entradasVendidas++;
+    public boolean venderEntradas(int cantidad) {
+        if (entradasVendidas + cantidad <= capacidadMaxima){
+            entradasVendidas += cantidad;
+            return true; // Venta exitosa
+        }
+        return false; // No hay disponibilidad
         }
     }
