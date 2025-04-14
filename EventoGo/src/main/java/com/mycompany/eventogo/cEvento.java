@@ -73,4 +73,8 @@ public class cEvento {
         }
         return false; // No hay disponibilidad
         }
+    
+    public boolean paraEliminar(){
+        return this.entradasVendidas == 0;
+    }
     }

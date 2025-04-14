@@ -23,10 +23,10 @@ public class cControlAcceso {
             if (entradas[i] != null && entradas[i].getIDEntrada().equals(codigoEntrada)) {
                 if (entradas[i].validacionEntrada()) {
                     entradas[i].marcarUtilizada();
-                    JOptionPane.showMessageDialog(null, "El acceso es permitido: " + 
+                    JOptionPane.showMessageDialog(null, "Estado: Válido (Acceso Permitido): " + 
                         entradas[i].getEventoEntrada().getNombreEvento());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Esta entrada ya ha sido utilizada.");
+                    JOptionPane.showMessageDialog(null, "Estado: Ya Usado (Acceso Denegado).");
                 }
                 return;
             }
