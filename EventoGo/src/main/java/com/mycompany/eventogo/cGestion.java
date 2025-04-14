@@ -192,23 +192,68 @@ public class cGestion {
         
         return proximosEventos;
     }
+    public void generarReporteAsistentesPorEvento() {
+        if(cantidadEventos == 0){
+            JOptionPane.showMessageDialog(null, "No existen eventos registrados.");
+            return;
+        }
+
+        StringBuilder reporteAsistentes = new StringBuilder(" _____ ASISTENTE POR EVENTO ______\n");
+        for (cEvento evento : eventosActivos) {
+            if (evento == null) continue;
+        reporteAsistentes.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
+        int contadorAsistentes = 0;
+        for (cEntrada entrada : entradas) {
+            if (entrada !=null && entrada.getEventoEntrada().equals(evento)){
+                contadorAsistentes++;
+                reporteAsistentes.append(" - ").append(entrada.getUsuarioEntrada().getNombreUsuario()).append(" (ID: ").append(entrada.getUsuarioEntrada().getIDUsuario()).append (")\n");                
+            }
+        }
+        reporteAsistentes.append("Total de entradas vendidas: ").append(contadorAsistentes).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, reporteAsistentes.toString());
+    }
     
+    public void generarReporteVentas(){
+        if (cantidadEventos == 0){
+            JOptionPane.showMessageDialog(null, "No existen eventos registrados.");
+            return;
+        }
+        StringBuilder reporte = new StringBuilder (" ______ REPORTE DE VENTAS ______\n");
+        for (cEvento evento : eventosActivos) {
+            if (evento == null) continue;
+            
+            int entradasVendidas = 0;
+            for (cEntrada entrada : entradas) {
+                if(entrada != null && entrada.getEventoEntrada().equals(evento)) {
+                    entradasVendidas++;
+                }
+            }
+            reporte.append("\nEvento: ").append(evento.getNombreEvento()).append("\nEntradas vendidas: ").append(entradasVendidas).append(" / ").append(evento.getCapacidadMaxima()).append("\nDisponibles: ").append(evento.getentradasDisponibles()).append("\n");            
+        }
+        JOptionPane.showMessageDialog(null, reporte.toString());
+    }
     public void generarReporteEventosDisponibles(){
         if (cantidadEventos == 0) {
-        JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
+        JOptionPane.showMessageDialog(null, "No existen eventos registrados.");
         return;
     }
-        String reporteEventos = "";
-    
-        for (int i = 0; i < cantidadEventos; i++) {
-            cEvento evento = eventosActivos[i];
-            reporteEventos += "Evento: " + evento.getNombreEvento() + "\n"
-                           + "Ubicación: " + evento.getUbicacionEvento() + "\n"
-                           + "Fecha: " + evento.getFechaEvento() + "\n"
-                           + "Tipo: " + evento.getTipoEvento() + "\n"
-                           + "Entradas Disponibles: " + evento.getentradasDisponibles() + "\n"
-                           + "--------------------------------------\n";;
+        StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE VENTAS ______\n");
+        for (cEvento evento : eventosActivos) {
+            if (evento == null) continue;
+            
+            int entradasVendidas = 0;
+            for (cEntrada entrada : entradas) {
+                if (entrada != null && entrada.getEventoEntrada().equals(evento)) {
+                    entradasVendidas++;
+                }
+        }
+        reporteEventos.append("\nEvento: ").append(evento.getNombreEvento())
+                .append("\nEntradas vendidas: ").append(entradasVendidas)
+                .append(" / ").append(evento.getCapacidadMaxima())
+                .append("\nDisponibles: ").append(evento.getentradasDisponibles()).append("\n");
+
     }
-        JOptionPane.showMessageDialog(null, reporteEventos);
+        JOptionPane.showMessageDialog(null, reporteEventos.toString());
 }    
 }

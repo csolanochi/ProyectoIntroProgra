@@ -70,21 +70,43 @@ public class EventoGo {
                                         control.validarEntrada(codigoEntrada);    
                                         break;
                                     case 3:
-                                        gestion.generarReporteEventosDisponibles();
+                                        int opcionReporte;
+                                        do {
+                                            opcionReporte = Integer.parseInt(JOptionPane.showInputDialog(
+                                            "MÓDULO DE REPORTES\n" +
+                                            "1. Eventos disponibles\n" +
+                                            "2. Asistentes por evento\n" +
+                                            "3. Reporte de ventas \n" +
+                                            "4. Volver al módulo de administrador\n"
+                                            ));
+                                            switch (opcionReporte){
+                                                case 1: // REPORTE DE EVENTOS DISPONIBLES
+                                                    gestion.generarReporteEventosDisponibles();
+                                                    break;
+                                                case 2: // REPORTE DE ASISTENTES
+                                                    gestion.generarReporteAsistentesPorEvento();
+                                                    break;
+                                                case 3: // REPORTE DE VENTAS
+                                                    gestion.generarReporteVentas();
+                                                    break;
+                                                case 4: // VOLVER AL MENÚ
+                                                    break;
+                                            }
+                                        }while (opcionReporte != 4);
                                         break;
-                                    case 4: 
-                                        break;
+                                      case 4: // SALIR DEL MENÚ DEL ADMINISTRADOR
+                                          break;
                                }
                             }while (opcionAdmin != 4);
                         }
                     }
                     break;
-                case 3:
+                case 3: // SALIR DEL SISTEMA
                     break;
-                default:
+                default: // OPCION INVALIDA
                     JOptionPane.showMessageDialog(null, "Opción no válida. Intente de nuevo.");
                     break;
             }
-        } while (opcion != 3);
+        } while (opcion != 3); // REPETIR HASTA QUE EL USUARIO ELIJA SALIR
     }
 }
