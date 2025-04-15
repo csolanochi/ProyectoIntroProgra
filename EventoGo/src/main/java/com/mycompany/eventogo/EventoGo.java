@@ -56,20 +56,24 @@ public class EventoGo {
                                 opcionAdmin = Integer.parseInt(JOptionPane.showInputDialog(
                                     "Seleccione una opción para continuar:\n" +
                                     "1. Registrar evento\n" +
-                                    "2. Verificar entrada\n" +
-                                    "3. Módulo de reportes\n" +
-                                    "4. Salir\n"
+                                    "2. Eliminar evento\n" +       
+                                    "3. Verificar entrada\n" +
+                                    "4. Módulo de reportes\n" +
+                                    "5. Salir\n"
                                 ));
                                 switch (opcionAdmin) {
                                     case 1:
                                         gestion.registrarEvento();
                                         break;
                                     case 2:
+                                        gestion.eliminarEvento();
+                                        break;
+                                    case 3:
                                         String codigoEntrada = JOptionPane.showInputDialog("Ingrese código de entrada (TKT-###):");
                                         cControlAcceso control = new cControlAcceso(gestion.getEntradas(), gestion.getTotalEntradas());
                                         control.validarEntrada(codigoEntrada);    
                                         break;
-                                    case 3:
+                                    case 4:
                                         int opcionReporte;
                                         do {
                                             opcionReporte = Integer.parseInt(JOptionPane.showInputDialog(
@@ -94,10 +98,10 @@ public class EventoGo {
                                             }
                                         }while (opcionReporte != 4);
                                         break;
-                                      case 4: // SALIR DEL MENÚ DEL ADMINISTRADOR
+                                      case 5: // SALIR DEL MENÚ DEL ADMINISTRADOR
                                           break;
                                }
-                            }while (opcionAdmin != 4);
+                            }while (opcionAdmin != 5);
                         }
                     }
                     break;

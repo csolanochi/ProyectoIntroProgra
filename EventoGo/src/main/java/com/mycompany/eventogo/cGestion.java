@@ -96,6 +96,38 @@ public class cGestion {
         }
     }
     
+    public void eliminarEvento() { 
+        mostrarListaEventos();
+        
+        // Si no hay eventos registrados, salir del método
+        if (cantidadEventos == 0){
+            return;
+        } 
+        
+        String idEliminar = JOptionPane.showInputDialog("Ingrese el ID del evento a eliminar:");
+        
+     
+        for (int i = 0; i < cantidadEventos; i++) {
+            if (eventosActivos[i].getIDEvento().equals(idEliminar)) { //Verificar entrada
+                if (eventosActivos[i].paraEliminar()){ //Verificar eventos sin entradas vendidas
+                    for (int j = i; j < cantidadEventos - 1; j++) {
+                        eventosActivos[j] = eventosActivos[j + 1];
+                    }
+                    // Limpia el último espacio que quedó duplicado
+                    eventosActivos[cantidadEventos - 1] = null;
+                    // Disminuye el contador total de eventos
+                    cantidadEventos--;
+                    JOptionPane.showMessageDialog(null, "Evento eliminado correctamente");
+                    return;
+                }else{
+                // Si tiene entradas vendidas, no se puede eliminar
+                JOptionPane.showMessageDialog(null, "No se puede eliminar, este evento ya tiene entradas vendidas");
+                return;
+                }
+            }
+        } JOptionPane.showMessageDialog(null, "No se encontró el evento con ID: " + idEliminar);
+    }
+
     public void mostrarListaEventos() {
         if (cantidadEventos == 0) {
             JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
@@ -103,7 +135,7 @@ public class cGestion {
         }
         String listaEventos = "Eventos registrados:\n";
         for (int i = 0; i < cantidadEventos; i++) {
-            listaEventos += (i + 1) + ". " + eventosActivos[i].getNombreEvento() + "\n";
+            listaEventos += (i + 1) + ". " + eventosActivos[i].getIDEvento() + " - " + eventosActivos[i].getNombreEvento() + "\n";
         }
         JOptionPane.showMessageDialog(null, listaEventos);
     }
