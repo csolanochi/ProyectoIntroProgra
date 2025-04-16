@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.eventogo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import java.util.Random;
 
@@ -63,6 +65,12 @@ public class cGestion {
     public int iniciarSesion() {
         String idUsuario = JOptionPane.showInputDialog("Ingrese su numero de cedula");
         String correo = JOptionPane.showInputDialog("Ingrese su correo electronico");
+        
+        if(idUsuario == null || correo == null){
+            JOptionPane.showMessageDialog(null, "Inicio de sesión cancelado por el usuario.");
+            return -1;
+        }
+        
         String newidUsuario = "USR-" + idUsuario;
 
         
@@ -84,7 +92,7 @@ public class cGestion {
             String IDEvento = new String(codigosEventos[cantidadEventos]);
             String nombreEvento = JOptionPane.showInputDialog("Ingrese el nombre del evento");
             String ubicacionEvento = JOptionPane.showInputDialog("Ingrese la ubicacion");
-            String fechaEvento = JOptionPane.showInputDialog("Ingrese su la fecha del evento");
+            String fechaEvento = JOptionPane.showInputDialog("Ingrese la fecha del evento");
             String tipoEvento = JOptionPane.showInputDialog("Ingrese el tipo de evento");
             int capacidadMaximaEvento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la capacidad maxima"));
             cEvento evento = new cEvento(IDEvento, nombreEvento, ubicacionEvento, fechaEvento, tipoEvento,capacidadMaximaEvento);
@@ -97,38 +105,59 @@ public class cGestion {
     }
     
     public void eliminarEvento() { 
-        mostrarListaEventos();
-        
-        // Si no hay eventos registrados, salir del método
-        if (cantidadEventos == 0){
-            return;
-        } 
-        
-        String idEliminar = JOptionPane.showInputDialog("Ingrese el ID del evento a eliminar:");
-        
-     
-        for (int i = 0; i < cantidadEventos; i++) {
-            if (eventosActivos[i].getIDEvento().equals(idEliminar)) { //Verificar entrada
-                if (eventosActivos[i].paraEliminar()){ //Verificar eventos sin entradas vendidas
-                    for (int j = i; j < cantidadEventos - 1; j++) {
-                        eventosActivos[j] = eventosActivos[j + 1];
+            List<String> eventosSeleccion = new ArrayList<>();
+            int count = 0;
+            for (cEvento evento : eventosActivos){
+                if(evento != null){
+                  eventosSeleccion.add(eventosActivos[count].getNombreEvento());
+                }
+                count++;
+            } 
+
+            String seleccion = mostrarDropDownEventos(eventosSeleccion, "Seleccione el evento que desea eliminar:");
+
+            if (cantidadEventos > 0) {
+
+
+            cEvento eventoSeleccionado = null;
+            if (seleccion != null) {
+                for (int j = 0; j < eventosSeleccion.size(); j++) {
+                    if (eventosSeleccion.get(j).equals(seleccion)) {
+                        eventoSeleccionado = eventosActivos[j];
+                        break;
                     }
-                    // Limpia el último espacio que quedó duplicado
-                    eventosActivos[cantidadEventos - 1] = null;
-                    // Disminuye el contador total de eventos
-                    cantidadEventos--;
-                    JOptionPane.showMessageDialog(null, "Evento eliminado correctamente");
-                    return;
-                }else{
-                // Si tiene entradas vendidas, no se puede eliminar
-                JOptionPane.showMessageDialog(null, "No se puede eliminar, este evento ya tiene entradas vendidas");
-                return;
                 }
             }
-        } JOptionPane.showMessageDialog(null, "No se encontró el evento con ID: " + idEliminar);
-    }
 
-    public void mostrarListaEventos() {
+            // Si no hay eventos registrados, salir del método
+            if (cantidadEventos == 0){
+                return;
+            } 
+
+
+            for (int i = 0; i < cantidadEventos; i++) {
+                if (eventosActivos[i].getIDEvento().equals(eventoSeleccionado.getIDEvento())) { //Verificar entrada
+                    if (eventosActivos[i].paraEliminar()){ //Verificar eventos sin entradas vendidas
+                        for (int j = i; j < cantidadEventos - 1; j++) {
+                            eventosActivos[j] = eventosActivos[j + 1];
+                        }
+                        // Limpia el último espacio que quedó duplicado
+                        eventosActivos[cantidadEventos - 1] = null;
+                        // Disminuye el contador total de eventos
+                        cantidadEventos--;
+                        JOptionPane.showMessageDialog(null, "Evento eliminado correctamente");
+                        return;
+                    }else{
+                    // Si tiene entradas vendidas, no se puede eliminar
+                    JOptionPane.showMessageDialog(null, "No se puede eliminar, este evento ya tiene entradas vendidas");
+                    return;
+                    }
+                }
+            } JOptionPane.showMessageDialog(null, "No se encontró el evento con ID: " + eventoSeleccionado.getIDEvento());
+        }
+    }
+    
+public void mostrarListaEventos() {
         if (cantidadEventos == 0) {
             JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
             return;
@@ -139,14 +168,50 @@ public class cGestion {
         }
         JOptionPane.showMessageDialog(null, listaEventos);
     }
+
+    public String mostrarDropDownEventos( List<String> eventosSeleccion, String mensaje) {
+        String seleccion = "";
+        if (cantidadEventos == 0) {
+            JOptionPane.showMessageDialog(null, "No hay eventos registrados.");
+            return seleccion;
+        }
+       
+            seleccion = (String) JOptionPane.showInputDialog(
+            null,
+            mensaje,
+            "Selección de Evento",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            eventosSeleccion.toArray(),
+            eventosSeleccion.getFirst()
+            );
+            
+       return seleccion;
+    }
     
     public void comprarEntrada(){ 
 
-        mostrarListaEventos();
+        List<String> eventosSeleccion = new ArrayList<>();
+        int count = 0;
+            for (cEvento evento : eventosActivos){
+                if(evento != null){
+                  eventosSeleccion.add(eventosActivos[count].getNombreEvento());
+                }
+                count++;
+            } 
+            
+        String seleccion = mostrarDropDownEventos(eventosSeleccion, "Seleccione el evento:");
 
         if (cantidadEventos > 0) {
-            int seleccionEvento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número del evento"));
-            cEvento eventoSeleccionado = eventosActivos[seleccionEvento - 1]; 
+            cEvento eventoSeleccionado = null;
+            if (seleccion != null) {
+                for (int j = 0; j < eventosSeleccion.size(); j++) {
+                    if (eventosSeleccion.get(j).equals(seleccion)) {
+                        eventoSeleccionado = eventosActivos[j];
+                        break;
+                    }
+                }
+            }
             int cantidadEntradas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de entradas (máximo 5):"));
             // Validar cantidad máxima
             if (cantidadEntradas > 5 || cantidadEntradas <= 0) {
@@ -233,7 +298,7 @@ public class cGestion {
         StringBuilder reporteAsistentes = new StringBuilder(" _____ ASISTENTE POR EVENTO ______\n");
         for (cEvento evento : eventosActivos) {
             if (evento == null) continue;
-        reporteAsistentes.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
+            reporteAsistentes.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
         int contadorAsistentes = 0;
         for (cEntrada entrada : entradas) {
             if (entrada !=null && entrada.getEventoEntrada().equals(evento)){
@@ -273,7 +338,8 @@ public class cGestion {
         StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE VENTAS ______\n");
         for (cEvento evento : eventosActivos) {
             if (evento == null) continue;
-            
+            reporteEventos.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
+            reporteEventos.append("\nFecha del Evento: ").append(evento.getFechaEvento()).append("\nTipo del evento:").append(evento.getTipoEvento()).append("\nUbicación del evento:").append(evento.getUbicacionEvento());
             int entradasVendidas = 0;
             for (cEntrada entrada : entradas) {
                 if (entrada != null && entrada.getEventoEntrada().equals(evento)) {

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class cControlAcceso {
     private cEntrada[] entradas;
     private int totalEntradas;
+    
 
     public cControlAcceso(cEntrada[] entradas, int totalEntradas) {
         this.entradas = entradas;
