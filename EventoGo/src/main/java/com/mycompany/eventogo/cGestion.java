@@ -261,7 +261,11 @@ public class cGestion {
                     entradasVendidas++;
                 }
             }
-            reporte.append("\nEvento: ").append(evento.getNombreEvento()).append("\nEntradas vendidas: ").append(entradasVendidas).append(" / ").append(evento.getCapacidadMaxima()).append("\nDisponibles: ").append(evento.getentradasDisponibles()).append("\n");            
+            reporte.append("\nEvento: ").append(evento.getNombreEvento())
+                    .append("\nEntradas vendidas: ").append(entradasVendidas)
+                    .append(" / ").append(evento.getCapacidadMaxima()).append("\nDisponibles: ")
+                    .append(evento.getentradasDisponibles())
+                    .append("\n");            
         }
         JOptionPane.showMessageDialog(null, reporte.toString());
     }
@@ -270,20 +274,17 @@ public class cGestion {
         JOptionPane.showMessageDialog(null, "No existen eventos registrados.");
         return;
     }
-        StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE VENTAS ______\n");
+        StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE EVENTOS ______\n");
         for (cEvento evento : eventosActivos) {
             if (evento == null) continue;
             
-            int entradasVendidas = 0;
-            for (cEntrada entrada : entradas) {
-                if (entrada != null && entrada.getEventoEntrada().equals(evento)) {
-                    entradasVendidas++;
-                }
-        }
         reporteEventos.append("\nEvento: ").append(evento.getNombreEvento())
-                .append("\nEntradas vendidas: ").append(entradasVendidas)
-                .append(" / ").append(evento.getCapacidadMaxima())
-                .append("\nDisponibles: ").append(evento.getentradasDisponibles()).append("\n");
+                .append("\nID Evento: ").append(evento.getIDEvento())
+                .append("\nUbicación: ").append(evento.getUbicacionEvento())
+                .append("\nFecha: ").append(evento.getFechaEvento())
+                .append("\nTipo de evento: ").append(evento.getTipoEvento())
+                .append("Capacidad máxima: ").append(evento.getCapacidadMaxima())
+                .append("\n");
 
     }
         JOptionPane.showMessageDialog(null, reporteEventos.toString());
