@@ -295,7 +295,7 @@ public void mostrarListaEventos() {
             return;
         }
 
-        StringBuilder reporteAsistentes = new StringBuilder(" _____ ASISTENTE POR EVENTO ______\n");
+        StringBuilder reporteAsistentes = new StringBuilder(" _____ ASISTENTES POR EVENTO ______\n");
         for (cEvento evento : eventosActivos) {
             if (evento == null) continue;
             reporteAsistentes.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
@@ -335,21 +335,18 @@ public void mostrarListaEventos() {
         JOptionPane.showMessageDialog(null, "No existen eventos registrados.");
         return;
     }
-        StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE VENTAS ______\n");
+        StringBuilder reporteEventos = new StringBuilder (" ______ REPORTE DE EVENTOS ______\n");
         for (cEvento evento : eventosActivos) {
             if (evento == null) continue;
-            reporteEventos.append("\nEvento: ").append(evento.getNombreEvento()).append("(").append(evento.getIDEvento()).append(")\n");
-            reporteEventos.append("\nFecha del Evento: ").append(evento.getFechaEvento()).append("\nTipo del evento:").append(evento.getTipoEvento()).append("\nUbicación del evento:").append(evento.getUbicacionEvento());
+            reporteEventos.append("\nEvento: ").append(evento.getNombreEvento()).append(" (").append(evento.getIDEvento()).append(")\n");
+            reporteEventos.append("\nFecha del Evento: ").append(evento.getFechaEvento()).append("\nTipo del evento: ").append(evento.getTipoEvento()).append("\nUbicación del evento: ").append(evento.getUbicacionEvento());
             int entradasVendidas = 0;
             for (cEntrada entrada : entradas) {
                 if (entrada != null && entrada.getEventoEntrada().equals(evento)) {
                     entradasVendidas++;
                 }
         }
-        reporteEventos.append("\nEvento: ").append(evento.getNombreEvento())
-                .append("\nEntradas vendidas: ").append(entradasVendidas)
-                .append(" / ").append(evento.getCapacidadMaxima())
-                .append("\nDisponibles: ").append(evento.getentradasDisponibles()).append("\n");
+        reporteEventos.append("\nEvento: ").append(evento.getNombreEvento()).append("\n");
 
     }
         JOptionPane.showMessageDialog(null, reporteEventos.toString());
